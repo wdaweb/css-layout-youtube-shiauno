@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube網頁切版練習</title>
+    <link rel="stylesheet" href="./css/all.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&family=Noto+Sans+TC:wght@100..900&display=swap"
+        rel="stylesheet">
+    <style>
+        body,
+        hr {
+            margin: 0;
+            padding: 0;
+            font-family: "LXGW WenKai Mono TC", monospace;
+        }
+
+        #top {
+            width: 100%;
+            height: 56px;
+            position: fixed;
+            background: white;
+            box-sizing: border-box;
+            padding-left: 16px;
+            z-index: 1000;
+        }
+
+        .t_menu {
+            width: 169px;
+            height: 56px;
+            box-sizing: border-box;
+            padding: 8px;
+            margin-right: 200px;
+            display: inline-block;
+        }
+
+        .menu {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 24px;
+            line-height: 40px;
+            display: inline-block;
+        }
+
+        .logo {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #search {
+            text-align: center;
+            width: 900px;
+            height: 56px;
+            display: inline-block;
+            margin-left: 70px;
+            line-height: 56px;
+            position: absolute;
+            box-sizing: border-box;
+            padding-top: 10px;
+        }
+
+        .top-login {
+            display: inline-block;
+            margin-left: 100px;
+            width: 100px;
+            height: 56px;
+            display: inline-block;
+            position: absolute;
+            line-height: 56px;
+            right: 20px;
+            font-size: 20px;
+        }
+
+        #text {
+            margin-right: 0;
+            width: 500px;
+            height: 30px;
+            border-radius: 18px 0px 0px 18px;
+            border: 1px solid #000;
+            display: inline-block;
+        }
+
+        #button {
+            width: 40px;
+            height: 35px;
+            border-radius: 0px 18px 18px 0px;
+            background-color: #ccc;
+            display: inline-block;
+            font-size: 15px;
+            position: absolute;
+            line-height: 35px;
+        }
+
+        #mic {
+            width: 35px;
+            height: 35px;
+            border-radius: 18px;
+            background: #ccc;
+            display: inline-block;
+            position: absolute;
+            right: 120px;
+            font-size: 15px;
+            line-height: 35px;
+            text-align: center;
+        }
+
+        #sidebar {
+            width: 240px;
+            height: calc(100vh - 56px);
+            top: 56px;
+            float: left;
+            position: fixed;
+            overflow: auto;
+            /* background: cyan; */
+        }
+
+        #sidebar::-webkit-scrollbar {
+            display: none;
+        }
+
+        #sidebar>div {
+            padding: 6px;
+        }
+
+        .btn {
+            width: 204px;
+            height: 40px;
+            padding: 6px;
+            line-height: 40px;
+        }
+
+        .btn:hover {
+            border-radius: 10px;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+
+        .min {
+            display: inline-block;
+            margin-left:  10px;
+            margin-right: 10px;
+        }
+
+        .login {
+            width: 60px;
+            height: 30px;
+            border-radius: 18px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            text-align: center;
+            color: blue;
+            margin-bottom: 10px;
+            line-height: 30px;
+        }
+
+        .login:hover {
+            width: 60px;
+            height: 30px;
+            border-radius: 18px;
+            background: lightblue;
+            cursor: pointer;
+        }
+
+        #content {
+            width: 1663px;
+            height: calc(100vh - 56px);
+            float: right;
+            position: absolute;
+            top: 56px;
+            right: 0px;
+            /* background: lemonchiffon; */
+        }
+
+        #content-top {
+            width: 1663px;
+            height: 56px;
+            position: fixed;
+            top: 50px;
+            right: 0px;
+            background: white;
+            z-index: 1000;
+        }
+
+        table {
+            margin: 10px 15px;
+        }
+
+        td {
+            display: inline-block;
+            background: lightgray;
+            padding: 5px 10px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        td:hover {
+            background: rgba(211, 211, 211, 0.568);
+            cursor: pointer;
+        }
+
+        #main-content {
+            width: 1663px;
+            height: calc(100vh - 56px - 56px);
+            position: absolute;
+            top: 56px;
+            box-sizing: border-box;
+            padding-top: 12px;
+            padding-left: 12px;
+        }
+
+        .video {
+            width: 400px;
+            height: 337px;
+            display: inline-block;
+        }
+
+        .thumbnail {
+            width: 390px;
+            height: 219px;
+            border-radius: 18px;
+            display: flex;
+            margin: auto;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 100px;
+            float: left;
+            margin-top: 10px;
+        }
+
+        .channl-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+        }
+
+        .title {
+            width: 318px;
+            height: 100px;
+            display: inline-block;
+            box-sizing: border-box;
+            padding-left: 5px;
+        }
+
+        .main-title {
+            width: 318px;
+            max-height: 44px;
+            overflow: hidden;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .channlName,
+        .view {
+            height: 20px;
+            font-size: 14px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 100px;
+            float: right;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top">
+        <div class="t_menu">
+            <div class="menu"><i class="fa-solid fa-bars"></i></div>
+            <div class="logo">
+                <i class="fa-brands fa-youtube" style="color: red;"></i>
+                <label for="yt">YouTube</label>
+                <label for="TW" style="font-size: 12px; position: absolute ;">TW</label>
+            </div>
+        </div>
+        <div id="search">
+            <div id="text"></div>
+            <div id="button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div id="mic">
+                <i class="fa-solid fa-microphone"></i>
+            </div>
+        </div>
+        <div class="top-login">
+            <div style="display: inline-block; margin-right: 10px;">
+                <i class="fa-solid fa-ellipsis-vertical "></i>
+            </div>
+            <div class="login" style="display: inline-block;">
+                <i class="fa-regular fa-circle-user"></i>
+                <label for="login">登入</label>
+            </div>
+        </div>
+    </div>
+    <div id="sidebar">
+        <div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+                <label for="home">首頁</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-regular fa-circle-play"></i>
+                </div>
+                <label for="shorts">shorts</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-inbox"></i>
+                </div>
+                <label for="subscriptions">訂閱內容</label>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-person-shelter"></i>
+                </div>
+                <label for="you">個人中心</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+                <label for="history">觀看紀錄</label>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <p>登入帳戶即可對影片表示喜歡、發布留言及訂閱頻道。</p>
+            <div class="login">
+                <i class="fa-regular fa-circle-user"></i>
+                <label for="login">登入</label>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <p>探索</p>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-fire"></i>
+                </div>
+                <label for="fire">發燒影片</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-music"></i>
+                </div>
+                <label for="music">音樂</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-clapperboard"></i>
+                </div>
+                <label for="movies">電影</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-tower-broadcast"></i>
+                </div>
+                <label for="live">直播</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-gamepad"></i>
+                </div>
+                <label for="gaming">遊戲</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-regular fa-newspaper"></i>
+                </div>
+                <label for="news">新聞</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-medal"></i>
+                </div>
+                <label for="sports">運動</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-regular fa-lightbulb"></i>
+                </div>
+                <label for="courses">課程</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-podcast"></i>
+                </div>
+                <label for="podcast">Podcast</label>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <p>更多 YouTube 功能</p>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+                <label for="YTP">YouTube Premium</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-circle-play"></i>
+                </div>
+                <label for="YTM">YouTube Music</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-brands fa-square-youtube"></i>
+                </div>
+                <label for="YTK">YouTube Kids</label>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <label for="setting">設定</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-regular fa-flag"></i>
+                </div>
+                <label for="report history">檢舉紀錄</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-regular fa-circle-question"></i>
+                </div>
+                <label for="help">說明</label>
+            </div>
+            <div class="btn">
+                <div class="min">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+                <label for="feedback">提供意見</label>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <p>簡介 媒體 著作權 與我們聯絡創作者 廣告 開發人員</p>
+            <p>條款 隱私權 政策與安全性 YouTube 運作方式 測試新功能</p>
+            <p>&copy; 2024 Google LLC</p>
+        </div>
+    </div>
+    <div id="content">
+        <div id="content-top">
+            <table>
+                <tr>
+                    <td>全部</td>
+                    <td>遊戲</td>
+                    <td>新聞</td>
+                    <td>直播中</td>
+                    <td>動畫</td>
+                    <td>動作冒險遊戲</td>
+                    <td>觀光</td>
+                    <td>平台遊戲</td>
+                    <td>烹飪節目</td>
+                    <td>最新上傳</td>
+                </tr>
+            </table>
+        </div>
+        <div id="main-content">
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/vl3OEe49du0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAqFcRQlM33NTYomshuYqXkTCeWDQ"
+                    alt="【微鬼畫】真實故事｜猜不到結局的一集＠mikidaiunchannel">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/B_5IyiAvE1V092ZhKvG3fXb62upFdPHqczc3wgexcSQiGzAptXKHprHsQe2Yk_AqjEUsPC0Q0g=s68-c-k-c0x00ffffff-no-rj"
+                            alt="微疼">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">【微鬼畫】真實故事｜猜不到結局的一集＠mikidaiunchannel</div>
+                        <div class="channlName">微疼</div>
+                        <div class="view">觀看次數:23萬次．1天前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/fIWV-E_q45o/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCXUOiNOeCtLeU_gi94wibKrc_6VA"
+                    alt="【台灣六大毒蛇】赤尾青竹絲(收容中)!台灣最常遇到的毒蛇!捕獵老鼠過程?台灣最衰的蛇">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/ytc/AIdro_lDKputzc-giY0H84erAKh_lx-NEsO0CICO1VR13YJfB6s=s68-c-k-c0x00ffffff-no-rj"
+                            alt="許伯&簡芝-倉鼠人">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">【台灣六大毒蛇】赤尾青竹絲(收容中)!台灣最常遇到的毒蛇!捕獵老鼠過程?台灣最衰...</div>
+                        <div class="channlName">許伯&簡芝-倉鼠人</div>
+                        <div class="view">觀看次數:29萬次．2天前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/1WEJKNSHD4s/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCYGAmcPu0nxxxR6qYxdcU6NWZibQ"
+                    alt="豐盛歷代級!每天銷售100個的瘋狂品質日式炸雞漢堡、牛排漢堡-...">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.googleusercontent.com/ytc/AIdro_kYdVG603ZWgmRiJERyQUi_N_HPVk70Fja-g8GvMY1Bmwg=s160-c-k-c0x00ffffff-no-rj"
+                            alt="끼룩푸드 seagull food">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">豐盛歷代級!每天銷售100個的瘋狂品質日式炸雞漢堡、牛排漢堡-...</div>
+                        <div class="channlName">끼룩푸드 seagull food</div>
+                        <div class="view">觀看次數:2578萬次．1年前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/-R2c9mXQAFg/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCHjmL6K4ebwvJTZXli4XssxHStLw"
+                    alt="馬丁】玩具公司社長遇害，死前竟瘋狂玩積木，馬丁帶你重溫柯南早期經典漫改劇集「...">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/zw0rMwueVaAG2XXt_p00au7XqVDR4yAnT6Q1M1GF4XXjqzbA1xwtSfqrmflunDE524s59hc_5fE=s68-c-k-c0x00ffffff-no-rj"
+                            alt="歐陽馬丁">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">馬丁】玩具公司社長遇害，死前竟瘋狂玩積木，馬丁帶你重溫柯南早期經典漫改劇集「...</div>
+                        <div class="channlName">歐陽馬丁</div>
+                        <div class="view">觀看次數:3.6萬次．20小時前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/lnmvtDiUkuk/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC8XqD3Y86ogLuFUlvHOJZd68qtog"
+                    alt="膽大黨 第2話【那是外星人吧】｜Muse木棉花 動畫 線上看">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/NNTqTn6wd5CWh4-ZgeNx9ai-Rv-S80FG3qfEp8fvONN3IeKjchXzt3H_6Bw8_YvrZiJSjCOC7w=s68-c-k-c0x00ffffff-no-rj"
+                            alt="Muse木棉花-TW">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">膽大黨 第2話【那是外星人吧】｜Muse木棉花 動畫 線上看</div>
+                        <div class="channlName">Muse木棉花-TW</div>
+                        <div class="view">觀看次數:8.6萬次．16小時前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/vUT1uCd3FMc/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAIRfTNPIwveRTeBw3CEacY_XK3_w"
+                    alt="【全字幕】遊戲發佈五天就售出2萬份 !! 讓人極度上癮的幸運類型精神...">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/lQW9tiP6DZa_zy0FDzSP0UedUHdnUceVeRwngGBJDCPXE_Yp_kS5GmaGOrsTAYrHN7ADRL0wFg=s68-c-k-c0x00ffffff-no-rj"
+                            alt="阿路的精神時光屋">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">【全字幕】遊戲發佈五天就售出2萬份 !! 讓人極度上癮的幸運類型精神...</div>
+                        <div class="channlName">阿路的精神時光屋</div>
+                        <div class="view">觀看次數:10萬次．2週前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/5XdgjOjjhyk/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAb3ZeOh8Bgsq0kFQL_Ku5QI6c51w"
+                    alt="炸蝦三爭霸！那個傳說中的醬汁終於記得了！？｜#小雞汁料理教室｜床編故事">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/-_2SGb93Ne5EBL1LEdu70qqFU3Wg6Wz6Ah__XSq2eh3BxUg6mwz1qXxQA6wpaNHpWibfVWEN=s68-c-k-c0x00ffffff-no-rj"
+                            alt="床編故事 Bad Time Stories">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">炸蝦三爭霸！那個傳說中的醬汁終於記得了！？｜#小雞汁料理教室｜床編故事</div>
+                        <div class="channlName">床編故事 Bad Time Stories</div>
+                        <div class="view">觀看次數:2.6萬次．2天前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/LcTxb1co0Ek/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBFlmbc-LsUdRO0IIAMBXBlYlsCqw"
+                    alt="日本成田親子旅遊之機師の一日下班行程！超好吃「台灣」鰻魚飯？康先生逛UNIQLO竟狂花X萬元！Vlog｜鷹式一家#日本成田 #成田山 #成田美食 #成田機場">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/-_2SGb93Ne5EBL1LEdu70qqFU3Wg6Wz6Ah__XSq2eh3BxUg6mwz1qXxQA6wpaNHpWibfVWEN=s68-c-k-c0x00ffffff-no-rj"
+                            alt="鷹式一家 Eaglish Family">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">日本成田親子旅遊之機師の一日下班行程！超好吃「台灣」鰻魚飯？康先生逛UNIQLO...</div>
+                        <div class="channlName">鷹式一家 Eaglish Family</div>
+                        <div class="view">觀看次數:5.9萬次．2天前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/1kJVZz5IsoU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC7VGKCvUbzmXlmSq2VykT22ert8A"
+                    alt="出發去英國玩囉!｜插畫家們的放假時間｜玩什麼鬼啦 英國行 Vlog">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/ytc/AIdro_ktVtw_LG8wJAe1HsmdvtXtZ5yP9wpsC-NGVqU8yLaoIw=s68-c-k-c0x00ffffff-no-rj"
+                            alt="玩什麼鬼啦">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">出發去英國玩囉!｜插畫家們的放假時間｜玩什麼鬼啦 英國行 Vlog</div>
+                        <div class="channlName">玩什麼鬼啦</div>
+                        <div class="view">觀看次數:11萬次．1年前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/D1_yfWdkQVo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCXIsDSLymhFiMaKWE8yTfd0MpUgA"
+                    alt="Part-Time Penguins: Making Salmon Miso Soup【cooking animated short film】">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/QPyZIyx6egb_YWVGSAEJMhgKsQGAi2BzCmo49Z8hF8_Xi7u1DzJDAaBww1tCh2jYPWFrQRSh=s68-c-k-c0x00ffffff-no-rj"
+                            alt="Poly Table">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">Part-Time Penguins: Making Salmon Miso Soup【cooking animated short film】</div>
+                        <div class="channlName">Poly Table</div>
+                        <div class="view">觀看次數:11萬次．1年前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/kMUr6nVdP8c/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBiyetUS0R3VaJW8_gp-swsTU5pfA"
+                    alt="曾莞婷示範八點檔「借視線」被誇超厲害：畢竟有專業訓練@ebcstars@DeeGirlsTalk">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/Sfzf5PuqOMkHsk4m29zMFWQPnixJzFz37n0U8fFGCeraFJVa0nXdQkkv3_EcbJYLKu-_pCWcYw=s68-c-k-c0x00ffffff-no-rj"
+                            alt="東森娛樂">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">曾莞婷示範八點檔「借視線」被誇超厲害：畢竟有專業訓練@ebcstars @DeeGirlsTalk</div>
+                        <div class="channlName">東森娛樂</div>
+                        <div class="view">觀看次數:5.4萬次．7天前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/LlkIb_BwCFk/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAYhGYgir23lRSBd0DpKohkHfSy6A"
+                    alt="蠟筆小新TV版 第888話｜Muse闔家歡 動畫 免費看">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/V5mmM1zyMzwYeeFmYDvsIUnZ3DZ6GgC5J0TYUP4-QjA6LpmNU03st76cjmyzxFE07o_z-PmHCw=s68-c-k-c0x00ffffff-no-rj"
+                            alt="Muse木棉花-闔家歡">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">蠟筆小新TV版 第888話｜Muse闔家歡 動畫 免費看</div>
+                        <div class="channlName">Muse木棉花-闔家歡</div>
+                        <div class="view">觀看次數：29萬次．11天前 </div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/LvARztlutgk/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC2vSuk8whrI6H1i7-mm4gEKdLOsQ"
+                    alt="APT.／ROSÉ (BLACKPINK) & Bruno Mars｜cover by 森森鈴蘭 Linglan、Cetro 賽特珞">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/gDboBBkjTpvk_trrV9Ej2TH-OBuVcgqIiJUUniuJC-Yeku6toB2QFLDAvCnWszwfrYkVa0ui=s48-c-k-c0x00ffffff-no-rj"
+                            alt="森森鈴蘭 / Lily Linglan【箱箱The Box所屬】">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">APT.／ROSÉ (BLACKPINK) & Bruno Mars｜cover by 森森鈴蘭 Linglan、Cetro 賽特珞</div>
+                        <div class="channlName">森森鈴蘭 / Lily Linglan【箱箱The Box所屬】</div>
+                        <div class="view">觀看次數：12萬次．6天前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/7O1XXNhVTxE/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDmqCmDWp3diAcOC47mr2QVp5QFQg"
+                    alt="原來這就是...全世界最好吃炸雞！！實測超熱門炸雞食譜！！【腦波弱日常】EP84">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.ggpht.com/ytc/AIdro_k5weeys-JIzhPUbjbSNps_LMWc5nP5fyjd-m4m8xuGAtM=s68-c-k-c0x00ffffff-no-rj"
+                            alt="好味小姐腦波弱">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">原來這就是...全世界最好吃炸雞！！實測超熱門炸雞食譜！！【腦波弱日常】EP84</div>
+                        <div class="channlName">好味小姐腦波弱</div>
+                        <div class="view">觀看次數：83萬次．8天前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/gGTtEjkUvDA/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAT56qnNsPOZgKFuUYAP1zcxo4F6Q"
+                    alt="💥魚仔說他是吹牛高手💥沒想到他揪我們玩騙子酒吧！給她好好上一課ft.凱吉、李聽...">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.googleusercontent.com/ytc/AIdro_mGhIawBzfJnjV7kaVPogQb3eYWX3ZZVFQeg-cmax6QlCE=s120-c-k-c0x00ffffff-no-rj"
+                            alt="【雙聲類】小光">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">💥魚仔說他是吹牛高手💥沒想到他揪我們玩騙子酒吧！給她好好上一課ft.凱吉、李...</div>
+                        <div class="channlName">【雙聲類】小光</div>
+                        <div class="view">觀看次數：3800次．直播時間：3週前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+            <div class="video">
+                <img class="thumbnail"
+                    src="https://i.ytimg.com/vi/rZHBCquUVfQ/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDjZybzsHSfRRYP8G8ujp0XhHsY6A"
+                    alt="酔いどれ知らず (Yoidore Shirazu) ver. Enna Alouette">
+                <div class="info">
+                    <div class="avatar">
+                        <img class="channl-icon"
+                            src="https://yt3.googleusercontent.com/2le01xSqRNeHJaN37HQ7zKwKP-zaM6c-I4bzu-53qHvH1oCvzFxdy9rSCEoWsJJv35UQtwmGQA=s120-c-k-c0x00ffffff-no-rj"
+                            alt="Enna Alouette【NIJISANJI EN】">
+                    </div>
+                    <div class="title">
+                        <div class="main-title">酔いどれ知らず (Yoidore Shirazu) ver. Enna Alouette</div>
+                        <div class="channlName">Enna Alouette【NIJISANJI EN】</div>
+                        <div class="view">觀看次數：491萬次．1年前</div>
+                    </div>
+                    <div class="icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
